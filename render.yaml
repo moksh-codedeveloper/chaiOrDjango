@@ -4,6 +4,7 @@ services:
     env: python
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
     startCommand: "gunicorn chaiOrDjango.wsgi:application"
+    staticPublishPath: staticfiles
     envVars:
       - key: DJANGO_SECRET_KEY
         value: your-secret-key
