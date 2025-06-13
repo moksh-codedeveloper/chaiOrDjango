@@ -19,7 +19,7 @@ def tweet_list(request):
     except Exception as e:
         return render(request, 'tweet_list.html', {'tweets': [], 'error': 'Unable to load tweets.'})
 
-@login_required
+@login_required(login_url='login')
 def tweet_create(request):
     try:
         if request.method == "POST":
@@ -35,7 +35,7 @@ def tweet_create(request):
     except Exception as e:
         return render(request, 'tweet_form.html', {"form": TweetForms(), "error": str(e)})
 
-@login_required
+@login_required(login_url='login')
 def tweet_edit(request, tweet_id):
     try:
         tweet = get_object_or_404(Tweet, pk=tweet_id, user=request.user)
@@ -50,7 +50,7 @@ def tweet_edit(request, tweet_id):
     except Exception as e:
         return render(request, 'tweet_form.html', {"form": TweetForms(), "error": str(e)})
 
-@login_required
+@login_required(login_url='login')
 def tweet_delete(request, tweet_id):
     try:
         tweet = get_object_or_404(Tweet, pk=tweet_id, user=request.user)
@@ -77,7 +77,7 @@ def register(request):
     except Exception as e:
         return render(request, 'registration/register.html', {"form": UserRegisteration(), "error": str(e)})
 
-@login_required
+@login_required(login_url='login')
 def tweet_search(request):
     try:
         query = request.GET.get('q', '')

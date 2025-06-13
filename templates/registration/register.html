@@ -28,7 +28,7 @@
                 {% endfor %}
                 {% endif %}
 
-                <form method="post" novalidate>
+                <form method="post" action="{% url 'register' %}" class="space-y-6">
                         {% csrf_token %}
                         
                         {% for field in form %}
@@ -70,10 +70,9 @@
 
                 <!-- Links -->
                 <div class="mt-6 text-sm text-center">
-                        <a href="#" class="text-blue-600 hover:underline">Forgot your password?</a>
                         <div class="mt-2 text-gray-600">
                                 Don't have an account? 
-                                <a href="{% url 'register' %}" class="text-blue-600 hover:underline">Sign up</a>
+                                <a href="{% url 'login' %}" class="text-blue-600 hover:underline">Register</a>
                         </div>
                 </div>
         </div>
