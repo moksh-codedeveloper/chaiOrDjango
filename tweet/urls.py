@@ -6,5 +6,6 @@ urlpatterns = [
     path('<int:tweet_id>/edit/', views.tweet_edit, name="tweet_edit"),
     path('<int:tweet_id>/delete/', views.tweet_delete, name="tweet_delete"),
     path('register/', views.register, name="register"),
+    path('accounts/login/', views.CustomLoginView.as_view(), name='login'),
     path('search/', views.tweet_search, name='tweet_search'),
 ]

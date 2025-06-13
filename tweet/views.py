@@ -5,7 +5,10 @@ from django.contrib.auth import login
 from django.db.models import Q
 from .models import Tweet
 from .forms import TweetForms, UserRegisteration
-
+from django.contrib.auth.views import LoginView
+# NEW: Custom login view
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
 # Set up logging
 logger = logging.getLogger(__name__)
 
