@@ -14,7 +14,6 @@ def tweet_list(request):
         tweets = Tweet.objects.all().order_by('-created_at')
         return render(request, 'tweet_list.html', {'tweets': tweets})
     except Exception as e:
-        logger.error(f"Error loading tweet list: {e}")
         return render(request, 'tweet_list.html', {'tweets': [], 'error': 'Unable to load tweets.'})
 
 @login_required
@@ -31,7 +30,6 @@ def tweet_create(request):
             form = TweetForms()
         return render(request, 'tweet_form.html', {"form": form})
     except Exception as e:
-        logger.error(f"Error creating tweet: {e}")
         return render(request, 'tweet_form.html', {"form": TweetForms(), "error": str(e)})
 
 @login_required
@@ -47,7 +45,6 @@ def tweet_edit(request, tweet_id):
             form = TweetForms(instance=tweet)
         return render(request, 'tweet_form.html', {"form": form})
     except Exception as e:
-        logger.error(f"Error editing tweet {tweet_id}: {e}")
         return render(request, 'tweet_form.html', {"form": TweetForms(), "error": str(e)})
 
 @login_required
@@ -59,7 +56,6 @@ def tweet_delete(request, tweet_id):
             return redirect('tweet_list')
         return render(request, "tweet_confirm_delete.html", {"tweet": tweet})
     except Exception as e:
-        logger.error(f"Error deleting tweet {tweet_id}: {e}")
         return render(request, "tweet_confirm_delete.html", {"error": str(e)})
 
 def register(request):
@@ -76,7 +72,6 @@ def register(request):
             form = UserRegisteration()
         return render(request, 'registration/register.html', {"form": form})
     except Exception as e:
-        logger.error(f"Error in user registration: {e}")
         return render(request, 'registration/register.html', {"form": UserRegisteration(), "error": str(e)})
 
 @login_required
@@ -91,5 +86,4 @@ def tweet_search(request):
             results = Tweet.objects.none()
         return render(request, 'tweet_search.html', {'results': results, 'query': query, "user": request.user})
     except Exception as e:
-        logger.error(f"Error searching tweets with query '{query}': {e}")
         return render(request, 'tweet_search.html', {"error": str(e)})
