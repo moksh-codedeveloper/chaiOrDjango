@@ -7,8 +7,6 @@ from django.contrib.auth import login
 from django.db.models import Q
 
 # Create your views here.
-def index(request):
-    return render(request, "index.html")
 
 def tweet_list(request):
     tweets = Tweet.objects.all().order_by('-created_at')
@@ -64,7 +62,7 @@ def register(request):
     else:
         form = UserRegisteration()
     return render(request, 'registration/register.html', {"form": form})
-
+@login_required
 def tweet_search(request):
     if request.method == "GET":
         query = request.GET.get('q', '')
