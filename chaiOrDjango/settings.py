@@ -25,7 +25,7 @@ SECRET_KEY = 'ef6*$17vjp3tqfa-9xam+9q#4l=xbn0^4ike$gms(dx&gn_&bk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['chaiordjango-88pl.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['tweet-e-jango.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
