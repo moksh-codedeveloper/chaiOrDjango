@@ -25,7 +25,7 @@ SECRET_KEY = 'ef6*$17vjp3tqfa-9xam+9q#4l=xbn0^4ike$gms(dx&gn_&bk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['chaiordjango-88pl.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -140,3 +140,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Required!
 LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+# CSRF and Session Security Settings
+CSRF_TRUSTED_ORIGINS = ['https://chaiordjango-88pl.onrender.com']
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+SECURE_SSL_REDIRECT = True  # optional but best practice
