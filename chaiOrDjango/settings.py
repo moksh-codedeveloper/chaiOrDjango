@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'ef6*$17vjp3tqfa-9xam+9q#4l=xbn0^4ike$gms(dx&gn_&bk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -161,5 +161,5 @@ EMAIL_USE_TLS = True
 
 # Replace with your Gmail account
 EMAIL_HOST_USER = 'maldemoksh437@gmail.com'
-EMAIL_HOST_PASSWORD = 'lvpi itaw tzot hugs'  # This is the App Password you generated
+EMAIL_HOST_PASSWORD = 'hekq rgez pess qgdi'  # This is the App Password you generated
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
