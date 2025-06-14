@@ -152,14 +152,13 @@ CSRF_TRUSTED_ORIGINS = [
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = False  # Only enable this if HTTPS is guaranteed
-
-# Gmail SMTP configuration for sending real emails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-# Replace with your Gmail account
 EMAIL_HOST_USER = 'maldemoksh437@gmail.com'
-EMAIL_HOST_PASSWORD = 'hekq rgez pess qgdi'  # This is the App Password you generated
+EMAIL_HOST_PASSWORD = 'hekqrgezpessqgdi'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Add these:
+EMAIL_FAIL_SILENTLY = False  # Raise errors visibly
