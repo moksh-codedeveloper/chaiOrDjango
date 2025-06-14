@@ -141,7 +141,7 @@ LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 # CSRF and Session Security Settings
-CSRF_TRUSTED_ORIGINS = ['tweet-e-jango.onrender.com']  # Adjust this to your domain in production
+CSRF_TRUSTED_ORIGINS = ['https://tweet-e-jango.onrender.com']  # Adjust this to your domain in production
 
 # Security settings (important when served via HTTPS)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
