@@ -65,6 +65,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',  # 🆕 Add this
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -138,8 +139,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Required!
 
 LOGIN_URL = 'accounts/login/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'tweet_list'
+LOGOUT_REDIRECT_URL = 'tweet_list'
 # CSRF and Session Security Settings
 CSRF_TRUSTED_ORIGINS = ['https://tweet-e-jango.onrender.com']  # Adjust this to your domain in production
 

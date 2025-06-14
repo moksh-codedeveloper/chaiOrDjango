@@ -1,4 +1,3 @@
-import logging
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
@@ -9,8 +8,7 @@ from django.contrib.auth.views import LoginView
 # NEW: Custom login view
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
-# Set up logging
-logger = logging.getLogger(__name__)
+
 
 def tweet_list(request):
     try:
