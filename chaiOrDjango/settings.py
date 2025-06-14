@@ -25,7 +25,7 @@ SECRET_KEY = 'ef6*$17vjp3tqfa-9xam+9q#4l=xbn0^4ike$gms(dx&gn_&bk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['tweet-e-jango.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -141,9 +141,10 @@ LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 # CSRF and Session Security Settings
-CSRF_TRUSTED_ORIGINS = ['https://chaiordjango-88pl.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['tweet-e-jango.onrender.com']  # Adjust this to your domain in production
 
-CSRF_COOKIE_SECURE = True
+# Security settings (important when served via HTTPS)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
-
-SECURE_SSL_REDIRECT = True  # optional but best practice
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True  # Only enable this if HTTPS is guaranteed
