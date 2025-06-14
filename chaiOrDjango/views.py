@@ -1,6 +1,5 @@
 from django.contrib.auth.views import PasswordResetView
 from django.utils import timezone
-from django.http import HttpResponseForbidden
 from datetime import timedelta
 
 class RateLimitedPasswordResetView(PasswordResetView):
