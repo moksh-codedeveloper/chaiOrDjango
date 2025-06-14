@@ -142,10 +142,24 @@ LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = 'tweet_list'
 LOGOUT_REDIRECT_URL = 'tweet_list'
 # CSRF and Session Security Settings
-CSRF_TRUSTED_ORIGINS = ['https://tweet-e-jango.onrender.com']  # Adjust this to your domain in production
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000"
+]
 
 # Security settings (important when served via HTTPS)
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True  # Only enable this if HTTPS is guaranteed
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False  # Only enable this if HTTPS is guaranteed
+
+# Gmail SMTP configuration for sending real emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Replace with your Gmail account
+EMAIL_HOST_USER = 'your_gmail@gmail.com'
+EMAIL_HOST_PASSWORD = 'your_app_password'  # This is the App Password you generated
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

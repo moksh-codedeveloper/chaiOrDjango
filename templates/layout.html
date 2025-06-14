@@ -4,128 +4,156 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1f2937"> <!-- gray-800 -->
     <title>{% block title %}chai or django{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
   </head>
-  <body class="font-serif leading-normal tracking-normal bg-black">
+  <body class="font-serif leading-normal tracking-normal bg-black text-white">
     <nav class="bg-gray-800">
-      <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="relative flex items-center justify-between h-16">
-          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <!-- Mobile menu button-->
-            <button
-              type="button"
-              class="relative inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-            >
-              <span class="absolute -inset-0.5"></span>
-              <span class="sr-only">Open main menu</span>
-              <!--
-            Icon when menu is closed.
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <img
+              class="h-8 w-auto"
+              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+              alt="Logo"
+            />
+          </div>
 
-            Menu open: "hidden", Menu closed: "block"
-          -->
+          <!-- Desktop Menu -->
+          <div class="hidden sm:flex sm:items-center sm:space-x-4">
+            <a
+              href="{% url 'tweet_list' %}"
+              class="px-3 py-2 rounded-md text-sm font-medium bg-gray-900 text-white"
+              >Tweet Home</a
+            >
+            <a
+              href="{% url 'tweet_create' %}"
+              class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Create Tweet</a
+            >
+            <a
+              href="{% url 'tweet_search' %}"
+              class="px-3 py-2 rounded-md text-sm font-medium bg-amber-500 text-zinc-900 hover:bg-amber-600"
+              >Search</a
+            >
+          </div>
+
+          <!-- Auth Button -->
+          <div class="hidden sm:flex items-center space-x-2">
+            {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button
+                type="submit"
+                class="px-4 py-2 bg-red-500 rounded-xl text-white hover:bg-red-600"
+              >
+                Logout
+              </button>
+            </form>
+            {% else %}
+            <a
+              href="{% url 'login' %}"
+              class="px-4 py-2 bg-blue-500 rounded-xl text-white hover:bg-blue-600"
+              >Login</a
+            >
+            {% endif %}
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="sm:hidden">
+            <button
+              id="menu-toggle"
+              class="text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white rounded-md p-2"
+            >
               <svg
-                class="block size-6"
+                class="h-6 w-6"
+                id="menu-open"
                 fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
                 stroke="currentColor"
-                aria-hidden="true"
-                data-slot="icon"
+                viewBox="0 0 24 24"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-              <!--
-            Icon when menu is open.
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
               <svg
-                class="hidden size-6"
+                class="h-6 w-6 hidden"
+                id="menu-close"
                 fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
                 stroke="currentColor"
-                aria-hidden="true"
-                data-slot="icon"
+                viewBox="0 0 24 24"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
             </button>
           </div>
-          <div
-            class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start"
-          >
-            <div class="flex items-center shrink-0">
-              <img
-                class="w-auto h-8"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                alt="Your Company"
-              />
-            </div>
-            <div class="hidden sm:ml-6 sm:block">
-              <div class="flex space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a
-                  href="{% url "tweet_list" %}"
-                  class="px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md"
-                  aria-current="page"
-                  >Tweet home</a>
-                <a
-                  href="{% url "tweet_create" %}"
-                  class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-                  >Create Tweet</a>
-                  <a href="{% url 'tweet_search' %}" class="flex items-center justify-center p-2 mx-2 text-zinc-300 hover:text-zinc-700 bg-amber-500 rounded-xl">Search</a>
-              </div>
-            </div>
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-          >
-            <button
-              type="button"
-              class="relative p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
-            >
-              {% if user.is_authenticated %}
-              <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="px-4 py-2 bg-red-500 rounded-xl text-zinc-700">Logout</button>
-              </form>
-              {% else %}
-              <a href="{% url 'login' %}" class="px-4 py-2 bg-blue-500 rounded-xl text-zinc-700">Login</a>
-              {% endif %}
-            </button>
-
-      <!-- Mobile menu, show/hide based on menu state. -->
-      <div class="sm:hidden" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1">
-          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-          <a
-            href="{% url 'tweet_list' %}"
-            class="block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md"
-            aria-current="page"
-            >Dashboard</a
-          >
-          <a
-            href="{% url "tweet_create" %}"
-            class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-            >Tweet Create</a
-          >
-          
         </div>
+      </div>
+
+      <!-- Mobile Menu Content -->
+      <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4 space-y-1">
+        <a
+          href="{% url 'tweet_list' %}"
+          class="block px-3 py-2 rounded-md text-base font-medium bg-gray-900 text-white"
+          >Tweet Home</a
+        >
+        <a
+          href="{% url 'tweet_create' %}"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+          >Create Tweet</a
+        >
+        <a
+          href="{% url 'tweet_search' %}"
+          class="block px-3 py-2 rounded-md text-base font-medium bg-amber-500 text-zinc-900 hover:bg-amber-600"
+          >Search</a
+        >
+
+        {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button
+            type="submit"
+            class="w-full text-left px-3 py-2 bg-red-500 rounded-md text-white hover:bg-red-600"
+          >
+            Logout
+          </button>
+        </form>
+        {% else %}
+        <a
+          href="{% url 'login' %}"
+          class="block px-3 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600"
+          >Login</a
+        >
+        <a href="{% url 'register' %}" class="px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md">Register</a>
+        {% endif %}
       </div>
     </nav>
 
     {% block content %} Tweets {% endblock %}
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("mobile-menu");
+      const openIcon = document.getElementById("menu-open");
+      const closeIcon = document.getElementById("menu-close");
+
+      menuToggle.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+        openIcon.classList.toggle("hidden");
+        closeIcon.classList.toggle("hidden");
+      });
+    </script>
   </body>
 </html>

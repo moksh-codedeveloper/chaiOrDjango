@@ -1,9 +1,15 @@
 {% extends "layout.html" %}
-{% block title %}Login{% endblock %}
-
+{% block title %}
+    Logged out
+{% endblock %}
 {% block content %}
-<h1>Logged Out</h1>
-<p>You have been logged out. Thank you for using our service! If you wish to log in again, please click the link below.</p>
-<a href="{% url "login" %}">Login again</a>
-
+<div class="flex justify-center items-center h-[60vh]">
+  <div class="text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-2">You have been logged out.</h2>
+    <p class="text-gray-600">See you again soon!</p>
+    <a href="{% url 'login' %}" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      Login Again
+    </a>
+  </div>
+</div>
 {% endblock %}
