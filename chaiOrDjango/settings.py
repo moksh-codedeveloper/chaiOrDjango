@@ -150,7 +150,7 @@ CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True 
 # Only enable this if HTTPS is guaranteed
 
-CSRF_TRUSTED_ORIGINS = ['https://your-app-name.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['*']
 
 
 # Email settings
