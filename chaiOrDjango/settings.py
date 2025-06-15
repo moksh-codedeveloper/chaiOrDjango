@@ -25,7 +25,7 @@ SECRET_KEY = 'ef6*$17vjp3tqfa-9xam+9q#4l=xbn0^4ike$gms(dx&gn_&bk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['tweet-e-jango.onrender.com']
 
 # Application definition
 
@@ -150,7 +150,7 @@ CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True 
 # Only enable this if HTTPS is guaranteed
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://tweet-e-jango.onrender.com']
 
 
 # Email settings
