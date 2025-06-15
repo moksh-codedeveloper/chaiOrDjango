@@ -141,24 +141,26 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Required!
 LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = 'tweet_list'
 LOGOUT_REDIRECT_URL = 'tweet_list'
-# CSRF and Session Security Settings
-CSRF_TRUSTED_ORIGINS = [
-    "http://127.0.0.1:8000",
-    "http://localhost:8000"
-]
 
-# Security settings (important when served via HTTPS)
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-SECURE_SSL_REDIRECT = False  # Only enable this if HTTPS is guaranteed
+
+# Security settings
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True 
+# Only enable this if HTTPS is guaranteed
+
+CSRF_TRUSTED_ORIGINS = ['https://your-app-name.onrender.com']
+
+
+# Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'maldemoksh437@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASS")
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_USE_TLS = True
 
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')  # Add this in Render env
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')  # App password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # Add these:
 EMAIL_FAIL_SILENTLY = False  # Raise errors visibly
