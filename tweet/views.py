@@ -75,7 +75,7 @@ def register(request):
                 print("User authenticated:", request.user)
 
                 # ✅ Return a redirect response (MUST)
-                return redirect('tweet_list')
+                return redirect('login')
             else:
                 print("Form errors:", form.errors)  # Debug any issue
         else:
