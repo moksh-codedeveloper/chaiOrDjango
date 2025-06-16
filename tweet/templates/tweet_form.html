@@ -24,6 +24,24 @@
       Submit Tweet
     </button>
     <a href="{% url 'tweet_list' %}" class="w-full py-2 px-4 bg-white text-black font-semibold rounded-xl shadow-md hover:bg-white/90 transition-all duration-300 hover:shadow-white/50 ring-2 ring-white/20 focus:outline-none focus:ring-4 focus:ring-blue-500/40">Go back to Home Page</a>
+    <div id="spinner" class="hidden flex items-center space-x-2 text-white">
+    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
+      </path>
+    </svg>
+    <span>Uploading tweet...</span>
+  </div>
   </form>
 </div>
+<script>
+  const form = document.getElementById("tweet-form");
+  const spinner = document.getElementById("spinner");
+
+  form.addEventListener("submit", () => {
+    spinner.classList.remove("hidden");
+  });
+</script>
+
 {% endblock %}
