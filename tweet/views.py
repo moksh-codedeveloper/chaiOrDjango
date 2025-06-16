@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
+
 from django.db.models import Q
 from .models import Tweet
 from .forms import TweetForms, UserRegisteration
@@ -71,7 +71,7 @@ def register(request):
                 user.save()
                 
                 # Log the user in immediately
-                login(request, user)
+                # login(request, user)
                 print("User authenticated:", request.user)
 
                 # ✅ Return a redirect response (MUST)
