@@ -12,6 +12,7 @@ class CustomLoginView(LoginView):
 
 def tweet_list(request):
     try:
+        print("Authenticated user:", request.user)
         tweets = Tweet.objects.all().order_by('-created_at')
         return render(request, 'tweet_list.html', {'tweets': tweets})
     except Exception as e:
@@ -66,8 +67,10 @@ def register(request):
             if form.is_valid():
                 user = form.save(commit=False)
                 user.set_password(form.cleaned_data['password1'])
+                print(user.is_active)  # Should be True
                 user.save()
                 login(request, user)
+                print("User logged in:", request.user)
                 return redirect('tweet_list')
         else:
             form = UserRegisteration()
