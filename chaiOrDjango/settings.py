@@ -170,7 +170,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 1  # hours
-AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
+AXES_LOCK_OUT_BY = 'user_and_ip'
 
 X_FRAME_OPTIONS = 'DENY'  # or 'SAMEORIGIN' if embedding needed
 # ----------------------------------
@@ -205,3 +205,8 @@ LOGGING = {
         },
     },
 }
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',         # For brute-force protection
+    'django.contrib.auth.backends.ModelBackend',   # Default Django authentication
+]
