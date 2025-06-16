@@ -25,7 +25,7 @@ SECRET_KEY = 'ef6*$17vjp3tqfa-9xam+9q#4l=xbn0^4ike$gms(dx&gn_&bk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['tweet-e-jango.onrender.com']
+ALLOWED_HOSTS = ['tweet-e-jango.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -40,11 +40,15 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
+    'csp',
+    'axes'
 ]
 TAILWIND_APP_NAME = 'theme' 
 INTERNAL_IPS = ['127.0.0.1']
 NPM_BIN_PATH='/usr/bin/npm'
 MIDDLEWARE = [
+    'axes.middleware.AxesMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -142,6 +146,8 @@ LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = 'tweet_list'
 LOGOUT_REDIRECT_URL = 'tweet_list'
 
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
 
 # Security settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -150,9 +156,26 @@ CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True 
 # Only enable this if HTTPS is guaranteed
 
-CSRF_TRUSTED_ORIGINS = ['https://tweet-e-jango.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://tweet-e-jango.onrender.com', 'http://localhost:8000', 'http://127.0.0.1:8000']
 
+# ----------------------------------
+# ✅ HSTS & Headers
+# ----------------------------------
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 1  # hours
+AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
+
+X_FRAME_OPTIONS = 'DENY'  # or 'SAMEORIGIN' if embedding needed
+# ----------------------------------
+# CORS settings
+# ----------------------------------
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -164,3 +187,21 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')  # App password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # Add these:
 EMAIL_FAIL_SILENTLY = False  # Raise errors visibly
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.security': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+}
