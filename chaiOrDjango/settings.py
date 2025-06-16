@@ -41,8 +41,21 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'csp',
-    'axes'
+    'axes',
+    'cloudinary',
+    'cloudinary_storage',
 ]
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    'API_KEY': os.environ.get("CLOUDINARY_API_KEY"),
+    'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET"),
+}
+
+
 TAILWIND_APP_NAME = 'theme' 
 INTERNAL_IPS = ['127.0.0.1']
 NPM_BIN_PATH='/usr/bin/npm'
@@ -135,6 +148,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 MEDIA_URL = '/media/'
+if not DEBUG:
+    MEDIA_URL = 'https://res.cloudinary.com/{}/'.format(
+        os.environ.get("CLOUDINARY_CLOUD_NAME")
+    )
+
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_URL = 'static/'
