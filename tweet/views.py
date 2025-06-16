@@ -59,6 +59,7 @@ def tweet_delete(request, tweet_id):
         return render(request, "tweet_confirm_delete.html", {"tweet": tweet})
     except Exception as e:
         return render(request, "tweet_confirm_delete.html", {"error": str(e)})
+    
 
 def register(request):
     try:
@@ -67,16 +68,26 @@ def register(request):
             if form.is_valid():
                 user = form.save(commit=False)
                 user.set_password(form.cleaned_data['password1'])
-                print(user.is_active)  # Should be True
                 user.save()
+                
+                # Log the user in immediately
                 login(request, user)
-                print("User logged in:", request.user)
+                print("User authenticated:", request.user)
+
+                # ✅ Return a redirect response (MUST)
                 return redirect('tweet_list')
+            else:
+                print("Form errors:", form.errors)  # Debug any issue
         else:
             form = UserRegisteration()
+
         return render(request, 'registration/register.html', {"form": form})
+
     except Exception as e:
-        return render(request, 'registration/register.html', {"form": UserRegisteration(), "error": str(e)})
+        return render(request, 'registration/register.html', {
+            "form": UserRegisteration(), 
+            "error": str(e)
+        })
 
 @login_required(login_url='login')
 def tweet_search(request):
